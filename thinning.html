@@ -92,14 +92,24 @@ RawBlameHistory
 		    </p>In the next step, structural elements are applied by using <a href="https://docs.opencv.org/3.3.0/d3/dbe/tutorial_opening_closing_hats.html">morphologyEx</a><br />
 			 <code> morphologyEx(dst_bin, foo, MORPH_HITMISS, seLeft0);</code>
 			    <br />
-			    Then result of operation (foo) is substracted from input image (dst_bin) so that the input image is updated. You can refer to the figures below for input image and the resulting output (foo).
+			    Then result of operation, which is (foo) above, is substracted from input image (dst_bin) so that the input image is updated. 
+			    You can refer to the figures below for input image and the resulting output (foo).
 			   <br />
 			   <figure>
   				<img src="images/hon.PNG" alt="hon">
+  				<figcaption>Input Image</figcaption>
+			    </figure>					
+			    
+			    <figure>
   				<img src="images/outseLeft0.jpg" alt="outseLeft0">
-  				<img src="images/outseLeft90.jpg" alt="outseLeft90">
-  				<figcaption>Left: Input image. Middle: Result of seLeft0: Right: Result of seLeft90</figcaption>
-				</figure>					<hr />10
+  				<figcaption>result of morphologyEx(dst_bin, foo, MORPH_HITMISS, seLeft0);</figcaption>
+			    </figure>
+			    
+			    <figure>
+  				<img src="images/outseLeft0.jpg" alt="outseLeft0">
+  				<figcaption>result of morphologyEx(dst_bin, foo, MORPH_HITMISS, seLeft90);</figcaption>
+			    </figure>
+			    <hr />10
 								<!--
 									<h2>Heading Level 2</h2>
 									<h3>Heading Level 3</h3>
