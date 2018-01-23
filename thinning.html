@@ -79,7 +79,8 @@ RawBlameHistory
                     The structuring elements are described by using the code below:<br />
                     
                     <code>
-                    Mat seLeft0 = (Mat_<int>(3, 3) <<-1, -1, -1, 0, 1, 0, 1, 1, 1);<br />
+	   	    <br />
+	            Mat seLeft0 = (Mat_<int>(3, 3) <<-1, -1, -1, 0, 1, 0, 1, 1, 1);
                     Mat seRight0 = (Mat_<int>(3, 3) << 0, -1, -1, 1, 1, -1, 0, 1, 0);<br />
                     Mat seLeft90 = (Mat_<int>(3, 3) << 1, 0, -1, 1, 1, -1, 1, 0, -1);<br />
                     Mat seRight90 = (Mat_<int>(3, 3) << 0, 1, 0, 1, 1, -1, 0, -1, -1);<br />
@@ -88,8 +89,10 @@ RawBlameHistory
                     Mat seLeft270 = (Mat_<int>(3, 3) << -1, 0, 1, -1, 1, 1, -1, 0, 1);<br />
                     Mat seRight270 = (Mat_<int>(3, 3) << -1, -1, 0, -1, 1, 1, 0, 1, 0);<br />
                     </code>
-		    </p>In the next step, structural elements are applied by using <a href="https://docs.opencv.org/3.3.0/d3/dbe/tutorial_opening_closing_hats.html">morphologyEx</a>
+		    </p>In the next step, structural elements are applied by using <a href="https://docs.opencv.org/3.3.0/d3/dbe/tutorial_opening_closing_hats.html">morphologyEx</a><br />
 			 <code> morphologyEx(dst_bin, foo, MORPH_HITMISS, seLeft0);</code>
+			    <br />
+			    Then result of operation (foo) is substracted from input image (dst_bin) so that the input image is updated. You can refer to the figure below for input image and the resulting output (foo) in the figures below.
 			    
 									<hr />10
 								<!--
