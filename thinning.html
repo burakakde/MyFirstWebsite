@@ -76,11 +76,11 @@ RawBlameHistory
 										Simple thinning algorithm that uses structuring elements as it is decribed <a href="http://homepages.inf.ed.ac.uk/rbf/HIPR2/thin.htm">here</a><br />
                     Structuring elements are applied using the 'hit - miss' operation till no furher changes are seen. 
                     
-                    The structuring elements are described by using the code below:<br />
+                    The structuring elements are described by using the code below:<br /><br />
                     
                     <code>
-	   	    <br />
-	            Mat seLeft0 = (Mat_<int>(3, 3) <<-1, -1, -1, 0, 1, 0, 1, 1, 1);
+	  
+	            Mat seLeft0 = (Mat_<int>(3, 3) <<-1, -1, -1, 0, 1, 0, 1, 1, 1);<br />
                     Mat seRight0 = (Mat_<int>(3, 3) << 0, -1, -1, 1, 1, -1, 0, 1, 0);<br />
                     Mat seLeft90 = (Mat_<int>(3, 3) << 1, 0, -1, 1, 1, -1, 1, 0, -1);<br />
                     Mat seRight90 = (Mat_<int>(3, 3) << 0, 1, 0, 1, 1, -1, 0, -1, -1);<br />
@@ -92,8 +92,8 @@ RawBlameHistory
 		    </p>In the next step, structural elements are applied by using <a href="https://docs.opencv.org/3.3.0/d3/dbe/tutorial_opening_closing_hats.html">morphologyEx</a><br />
 			 <code> morphologyEx(dst_bin, foo, MORPH_HITMISS, seLeft0);</code>
 			    <br />
-			    Then result of operation (foo) is substracted from input image (dst_bin) so that the input image is updated. You can refer to the figure below for input image and the resulting output (foo) in the figures below.
-			    
+			    Then result of operation (foo) is substracted from input image (dst_bin) so that the input image is updated. You can refer to the figures below for input image and the resulting output (foo).
+			    <img src="images/maze.png" alt="" />
 									<hr />10
 								<!--
 									<h2>Heading Level 2</h2>
