@@ -73,22 +73,24 @@ RawBlameHistory
 									This is <u>underlined</u> and this is code: <code>for (;;) { ... }</code>.
 									Finally, this is a <a href="https://www.esat.kuleuven.be/english/education/master/ee">link</a>.
 									-->
-										Simple thinning algorithm that uses structuring elements as it is decribed in <a href="http://homepages.inf.ed.ac.uk/rbf/HIPR2/thin.htm">here</a>?<br />
+										Simple thinning algorithm that uses structuring elements as it is decribed <a href="http://homepages.inf.ed.ac.uk/rbf/HIPR2/thin.htm">here</a><br />
                     Structuring elements are applied using the 'hit - miss' operation till no furher changes are seen. 
                     
-                    The structuring elements are described by using the code below:
+                    The structuring elements are described by using the code below:<br />
                     
                     <code>
-                    Mat seLeft0 = (Mat_<int>(3, 3) <<-1, -1, -1, 0, 1, 0, 1, 1, 1);
-                    Mat seRight0 = (Mat_<int>(3, 3) << 0, -1, -1, 1, 1, -1, 0, 1, 0);
-                    Mat seLeft90 = (Mat_<int>(3, 3) << 1, 0, -1, 1, 1, -1, 1, 0, -1);
-                    Mat seRight90 = (Mat_<int>(3, 3) << 0, 1, 0, 1, 1, -1, 0, -1, -1);
-                    Mat seLeft180 = (Mat_<int>(3, 3) << 1, 1, 1, 0, 1, 0, -1, -1, -1);
-                    Mat seRight180 = (Mat_<int>(3, 3) << 0, 1, 0, -1, 1, 1, -1, -1, 0);
-                    Mat seLeft270 = (Mat_<int>(3, 3) << -1, 0, 1, -1, 1, 1, -1, 0, 1);
-                    Mat seRight270 = (Mat_<int>(3, 3) << -1, -1, 0, -1, 1, 1, 0, 1, 0);
+                    Mat seLeft0 = (Mat_<int>(3, 3) <<-1, -1, -1, 0, 1, 0, 1, 1, 1);<br />
+                    Mat seRight0 = (Mat_<int>(3, 3) << 0, -1, -1, 1, 1, -1, 0, 1, 0);<br />
+                    Mat seLeft90 = (Mat_<int>(3, 3) << 1, 0, -1, 1, 1, -1, 1, 0, -1);<br />
+                    Mat seRight90 = (Mat_<int>(3, 3) << 0, 1, 0, 1, 1, -1, 0, -1, -1);<br />
+                    Mat seLeft180 = (Mat_<int>(3, 3) << 1, 1, 1, 0, 1, 0, -1, -1, -1);<br />
+                    Mat seRight180 = (Mat_<int>(3, 3) << 0, 1, 0, -1, 1, 1, -1, -1, 0);<br />
+                    Mat seLeft270 = (Mat_<int>(3, 3) << -1, 0, 1, -1, 1, 1, -1, 0, 1);<br />
+                    Mat seRight270 = (Mat_<int>(3, 3) << -1, -1, 0, -1, 1, 1, 0, 1, 0);<br />
                     </code>
-										</p>
+		    </p>In the next step, structural elements are applied by using <a href="https://docs.opencv.org/3.3.0/d3/dbe/tutorial_opening_closing_hats.html">morphologyEx</a>
+			 <code> morphologyEx(dst_bin, foo, MORPH_HITMISS, seLeft0);</code>
+			    
 									<hr />10
 								<!--
 									<h2>Heading Level 2</h2>
