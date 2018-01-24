@@ -73,108 +73,24 @@ RawBlameHistory
 									This is <u>underlined</u> and this is code: <code>for (;;) { ... }</code>.
 									Finally, this is a <a href="https://www.esat.kuleuven.be/english/education/master/ee">link</a>.
 									-->
-										Simple thinning algorithm that uses structuring elements as it is decribed <a href="http://homepages.inf.ed.ac.uk/rbf/HIPR2/thin.htm">here</a><br />
-                    Structuring elements are applied using the 'hit - miss' operation till no furher changes are seen. 
+										In this work, we consider the task of depth estimation from a single image, with
+										the target application of obstacle avoidance and path planning for single-camera
+										equipped quadrotors. We use previously available training data, the NYU2 data
+										set, comprising of large numbers of images of indoor scenes, and their corresponding
+										depth-maps, and also assemble our own training data by walking around the ESAT
+										building with a Kinect sensor. We experiment with two feature extraction pipelines.
+										The first, uses traditional dense-SIFT features, extracted from within uniform regions
+										called superpixels, in an image. These dense-SIFT features are aggregated using
+										Fisher vector pooling. The second, uses the currently popular deep CNN features,
+										also extracted from within superpixels. Using these features and an SVM classifier,
+										superpixels are classified into close, medium and far, We demonstrate 80% accuracy
+										in the NYU2 data set, and achieve unto 99% accuracy when trained on the ESAT
+										dataset, and tested on the left-out parts of the same data set. In a practical
+										deployment, it is feasible to scan an environment once, train our algorithm on those
+										images and depth maps, and then use the trained SVMs to allow a quadrotor to fly
+										around that environment with a single forward-facing camera.<br /><br />
                     
-                    The structuring elements are described by using the code below:<br /><br />
-                    
-                    <code>
-	  
-	            Mat seLeft0 = (Mat_<int>(3, 3) <<-1, -1, -1, 0, 1, 0, 1, 1, 1);<br />
-                    Mat seRight0 = (Mat_<int>(3, 3) << 0, -1, -1, 1, 1, -1, 0, 1, 0);<br />
-                    Mat seLeft90 = (Mat_<int>(3, 3) << 1, 0, -1, 1, 1, -1, 1, 0, -1);<br />
-                    Mat seRight90 = (Mat_<int>(3, 3) << 0, 1, 0, 1, 1, -1, 0, -1, -1);<br />
-                    Mat seLeft180 = (Mat_<int>(3, 3) << 1, 1, 1, 0, 1, 0, -1, -1, -1);<br />
-                    Mat seRight180 = (Mat_<int>(3, 3) << 0, 1, 0, -1, 1, 1, -1, -1, 0);<br />
-                    Mat seLeft270 = (Mat_<int>(3, 3) << -1, 0, 1, -1, 1, 1, -1, 0, 1);<br />
-                    Mat seRight270 = (Mat_<int>(3, 3) << -1, -1, 0, -1, 1, 1, 0, 1, 0);<br />
-                    </code>
-		    </p>In the next step, structural elements are applied by using <a href="https://docs.opencv.org/3.3.0/d3/dbe/tutorial_opening_closing_hats.html">morphologyEx</a><br />
-			 <code> morphologyEx(dst_bin, foo, MORPH_HITMISS, seLeft0);</code>
-			    <br />
-			    Then result of operation, which is (foo) above, is substracted from input image (dst_bin) so that the input image is updated. Substraction is done by the line below.
-			    <br />
-			    <code>
-				dst_bin = dst_bin - foo;	
-                    	    </code>
-			    <br />
-			    You can refer to the figures below for input image and the resulting output (foo).<br />
-			   <br />
-			   
-			  <center>
-			  <figure>
-				  <img src="images/hon.PNG" alt="hon" width="200" height="200">
-				  <img src="images/outseLeft0.jpg" alt="outseLeft0" width="200" height="200">
-				  <img src="images/outseLeft90.jpg" alt="outseLeft90" width="200" height="200">
-			    	  <figcaption>Left: Input image (dst_bin). Middle: foo which is output of morphologyEx(dst_bin, foo, MORPH_HITMISS, seLeft0). Right: foo which is output of morphologyEx(dst_bin, foo, MORPH_HITMISS, seLeft90);</figcaption>
-			    </figure>
-			    </center>
-			    <br />	
-			    The effect of subtracting the foo's from the input (dst_bin) in the array of images below.  
-			      <br />
-				  <center>
-				  <figure>
-					  <img src="images/dst_bin5.jpg" alt="dst_bin5" width="200" height="200">
-					  <img src="images/dst_bin10.jpg" alt="dst_bin10" width="200" height="200">
-					  <img src="images/dst_bin15.jpg" alt="dst_bin15" width="200" height="200">
-					  <img src="images/dst_bin20.jpg" alt="dst_bin20" width="200" height="200">
-					  <img src="images/dst_bin25.jpg" alt="dst_bin25" width="200" height="200">
-					  <img src="images/result.jpg" alt="result" width="200" height="200">
-					  <figcaption>From left to right result of iterations 5, 10, 15, 20, 25 and 29 (final) respectively.</figcaption>
-				    </figure>
-				    </center>
-			   
-			    	 <br />
-			    Above results are obtained by using the loop below. 
-			    <br />
-			    <code>
-				<br />
-				    int ctr{ 0 };<br />
-	while (true)<br />
-	{<br />
-		ctr++;<br />
-		cout << "Iteration " << ctr << endl;<br />
-
-		morphologyEx(dst_bin, foo, MORPH_HITMISS, seLeft0);<br />
-		dst_bin = dst_bin - foo;<br />
-
-		morphologyEx(dst_bin, foo, MORPH_HITMISS, seRight0);<br />
-		dst_bin = dst_bin - foo;<br />
-
-		morphologyEx(dst_bin, foo, MORPH_HITMISS, seLeft90);<br />
-		dst_bin = dst_bin - foo;<br />
-
-		morphologyEx(dst_bin, foo, MORPH_HITMISS, seRight90);<br />
-		dst_bin = dst_bin - foo;<br />
-
-		morphologyEx(dst_bin, foo, MORPH_HITMISS, seLeft180);<br />
-		dst_bin = dst_bin - foo;<br />
-
-		morphologyEx(dst_bin, foo, MORPH_HITMISS, seRight180);<br />
-		dst_bin = dst_bin - foo;<br />
-
-		morphologyEx(dst_bin, foo, MORPH_HITMISS, seLeft270);<br />
-		dst_bin = dst_bin - foo;<br />
-
-		morphologyEx(dst_bin, foo, MORPH_HITMISS, seRight270);<br />
-		if (countNonZero(foo) == 0) break;<br />
-		dst_bin = dst_bin - foo;<br />
-		
-	}	
-                    	    </code>
-			    
-			    <br />
-			    <br />
-			    ctr is just a counter that keeps track of number of iteration while the line below breaks the loop if no further changes are seen.
-			    
-			    <br />
-			    <code>
-			    if (countNonZero(foo) == 0) break;
-			    </code>
-			    <br />
-			    
-			    You can find the source code <a href="https://github.com/burakakde/morphological_thinning_using_structuring_elements">here</a>
-			    
+                 
 								<!--
 									<h2>Heading Level 2</h2>
 									<h3>Heading Level 3</h3>
