@@ -127,42 +127,42 @@ RawBlameHistory
 			    	 <br />
 			    Above results are obtained by using the loop below. 
 			    <code>
-				int ctr{ 0 };
-	while (true)
-	{
-		ctr++;
-		cout << "Iteration " << ctr << endl;
+				int ctr{ 0 };<br />
+	while (true)<br />
+	{<br />
+		ctr++;<br />
+		cout << "Iteration " << ctr << endl;<br />
 
-		morphologyEx(dst_bin, foo, MORPH_HITMISS, seLeft0);
-		dst_bin = dst_bin - foo;
+		morphologyEx(dst_bin, foo, MORPH_HITMISS, seLeft0);<br />
+		dst_bin = dst_bin - foo;<br />
 
-		morphologyEx(dst_bin, foo, MORPH_HITMISS, seRight0);
-		dst_bin = dst_bin - foo;
+		morphologyEx(dst_bin, foo, MORPH_HITMISS, seRight0);<br />
+		dst_bin = dst_bin - foo;<br />
 
-		morphologyEx(dst_bin, foo, MORPH_HITMISS, seLeft90);
-		dst_bin = dst_bin - foo;
+		morphologyEx(dst_bin, foo, MORPH_HITMISS, seLeft90);<br />
+		dst_bin = dst_bin - foo;<br />
 
-		morphologyEx(dst_bin, foo, MORPH_HITMISS, seRight90);
-		dst_bin = dst_bin - foo;
+		morphologyEx(dst_bin, foo, MORPH_HITMISS, seRight90);<br />
+		dst_bin = dst_bin - foo;<br />
 
-		morphologyEx(dst_bin, foo, MORPH_HITMISS, seLeft180);
-		dst_bin = dst_bin - foo;
+		morphologyEx(dst_bin, foo, MORPH_HITMISS, seLeft180);<br />
+		dst_bin = dst_bin - foo;<br />
 
-		morphologyEx(dst_bin, foo, MORPH_HITMISS, seRight180);
-		dst_bin = dst_bin - foo;
+		morphologyEx(dst_bin, foo, MORPH_HITMISS, seRight180);<br />
+		dst_bin = dst_bin - foo;<br />
 
-		morphologyEx(dst_bin, foo, MORPH_HITMISS, seLeft270);
-		dst_bin = dst_bin - foo;
+		morphologyEx(dst_bin, foo, MORPH_HITMISS, seLeft270);<br />
+		dst_bin = dst_bin - foo;<br />
 
-		morphologyEx(dst_bin, foo, MORPH_HITMISS, seRight270);
-		if (countNonZero(foo) == 0) break;
-		dst_bin = dst_bin - foo;
+		morphologyEx(dst_bin, foo, MORPH_HITMISS, seRight270);<br />
+		if (countNonZero(foo) == 0) break;<br />
+		dst_bin = dst_bin - foo;<br />
 		
 	}	
                     	    </code>
 			    
 			    <br />
-			    
+			    <br />
 			    ctr is just a counter that keeps track of number of iteration while the line below breaks the loop if no further changes are seen.
 			    
 			    
