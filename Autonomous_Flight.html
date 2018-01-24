@@ -1,0 +1,638 @@
+Skip to content
+This repository
+Search
+Pull requests
+Issues
+Marketplace
+Explore
+ @burakakde
+ Sign out
+ Watch 0
+  Star 0  Fork 0 burakakde/MyFirstWebsite
+ Code  Issues 0  Pull requests 0  Projects 0  Wiki  Insights  Settings
+Branch: gh-pages Find file Copy pathMyFirstWebsite/education.html
+eeca46f  on Dec 14, 2017
+@burakakde burakakde Update education.html
+1 contributor
+RawBlameHistory     
+552 lines (512 sloc)  23.3 KB
+
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Thinning</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-loading">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<a href="index.html" class="logo">Burak Akdemir</a>
+					</header>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li><a href="index.html">This is Massively</a></li>
+							<li><a href="generic.html">Generic Page</a></li>
+							<li class="active"><a href="Thinning.html">Thinning</a></li>
+						</ul>
+						<ul class="icons">
+							<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+							<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+							<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+							<li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<section class="post">
+								<header class="major">
+									<h1>Thinning</h1>
+								</header>
+
+								<!-- Text stuff -->	 
+									<!--<h2>Text</h2>-->
+									<p>
+										<!-- This is <b>bold</b> and this is <strong>strong</strong>. This is <i>italic</i> and this is <em>emphasized</em>.
+									This is <sup>superscript</sup> text and this is <sub>subscript</sub> text.
+									This is <u>underlined</u> and this is code: <code>for (;;) { ... }</code>.
+									Finally, this is a <a href="https://www.esat.kuleuven.be/english/education/master/ee">link</a>.
+									-->
+										Simple thinning algorithm that uses structuring elements as it is decribed <a href="http://homepages.inf.ed.ac.uk/rbf/HIPR2/thin.htm">here</a><br />
+                    Structuring elements are applied using the 'hit - miss' operation till no furher changes are seen. 
+                    
+                    The structuring elements are described by using the code below:<br /><br />
+                    
+                    <code>
+	  
+	            Mat seLeft0 = (Mat_<int>(3, 3) <<-1, -1, -1, 0, 1, 0, 1, 1, 1);<br />
+                    Mat seRight0 = (Mat_<int>(3, 3) << 0, -1, -1, 1, 1, -1, 0, 1, 0);<br />
+                    Mat seLeft90 = (Mat_<int>(3, 3) << 1, 0, -1, 1, 1, -1, 1, 0, -1);<br />
+                    Mat seRight90 = (Mat_<int>(3, 3) << 0, 1, 0, 1, 1, -1, 0, -1, -1);<br />
+                    Mat seLeft180 = (Mat_<int>(3, 3) << 1, 1, 1, 0, 1, 0, -1, -1, -1);<br />
+                    Mat seRight180 = (Mat_<int>(3, 3) << 0, 1, 0, -1, 1, 1, -1, -1, 0);<br />
+                    Mat seLeft270 = (Mat_<int>(3, 3) << -1, 0, 1, -1, 1, 1, -1, 0, 1);<br />
+                    Mat seRight270 = (Mat_<int>(3, 3) << -1, -1, 0, -1, 1, 1, 0, 1, 0);<br />
+                    </code>
+		    </p>In the next step, structural elements are applied by using <a href="https://docs.opencv.org/3.3.0/d3/dbe/tutorial_opening_closing_hats.html">morphologyEx</a><br />
+			 <code> morphologyEx(dst_bin, foo, MORPH_HITMISS, seLeft0);</code>
+			    <br />
+			    Then result of operation, which is (foo) above, is substracted from input image (dst_bin) so that the input image is updated. Substraction is done by the line below.
+			    <br />
+			    <code>
+				dst_bin = dst_bin - foo;	
+                    	    </code>
+			    <br />
+			    You can refer to the figures below for input image and the resulting output (foo).<br />
+			   <br />
+			   
+			  <center>
+			  <figure>
+				  <img src="images/hon.PNG" alt="hon" width="200" height="200">
+				  <img src="images/outseLeft0.jpg" alt="outseLeft0" width="200" height="200">
+				  <img src="images/outseLeft90.jpg" alt="outseLeft90" width="200" height="200">
+			    	  <figcaption>Left: Input image (dst_bin). Middle: foo which is output of morphologyEx(dst_bin, foo, MORPH_HITMISS, seLeft0). Right: foo which is output of morphologyEx(dst_bin, foo, MORPH_HITMISS, seLeft90);</figcaption>
+			    </figure>
+			    </center>
+			    <br />	
+			    The effect of subtracting the foo's from the input (dst_bin) in the array of images below.  
+			      <br />
+				  <center>
+				  <figure>
+					  <img src="images/dst_bin5.jpg" alt="dst_bin5" width="200" height="200">
+					  <img src="images/dst_bin10.jpg" alt="dst_bin10" width="200" height="200">
+					  <img src="images/dst_bin15.jpg" alt="dst_bin15" width="200" height="200">
+					  <img src="images/dst_bin20.jpg" alt="dst_bin20" width="200" height="200">
+					  <img src="images/dst_bin25.jpg" alt="dst_bin25" width="200" height="200">
+					  <img src="images/result.jpg" alt="result" width="200" height="200">
+					  <figcaption>From left to right result of iterations 5, 10, 15, 20, 25 and 29 (final) respectively.</figcaption>
+				    </figure>
+				    </center>
+			   
+			    	 <br />
+			    Above results are obtained by using the loop below. 
+			    <br />
+			    <code>
+				<br />
+				    int ctr{ 0 };<br />
+	while (true)<br />
+	{<br />
+		ctr++;<br />
+		cout << "Iteration " << ctr << endl;<br />
+
+		morphologyEx(dst_bin, foo, MORPH_HITMISS, seLeft0);<br />
+		dst_bin = dst_bin - foo;<br />
+
+		morphologyEx(dst_bin, foo, MORPH_HITMISS, seRight0);<br />
+		dst_bin = dst_bin - foo;<br />
+
+		morphologyEx(dst_bin, foo, MORPH_HITMISS, seLeft90);<br />
+		dst_bin = dst_bin - foo;<br />
+
+		morphologyEx(dst_bin, foo, MORPH_HITMISS, seRight90);<br />
+		dst_bin = dst_bin - foo;<br />
+
+		morphologyEx(dst_bin, foo, MORPH_HITMISS, seLeft180);<br />
+		dst_bin = dst_bin - foo;<br />
+
+		morphologyEx(dst_bin, foo, MORPH_HITMISS, seRight180);<br />
+		dst_bin = dst_bin - foo;<br />
+
+		morphologyEx(dst_bin, foo, MORPH_HITMISS, seLeft270);<br />
+		dst_bin = dst_bin - foo;<br />
+
+		morphologyEx(dst_bin, foo, MORPH_HITMISS, seRight270);<br />
+		if (countNonZero(foo) == 0) break;<br />
+		dst_bin = dst_bin - foo;<br />
+		
+	}	
+                    	    </code>
+			    
+			    <br />
+			    <br />
+			    ctr is just a counter that keeps track of number of iteration while the line below breaks the loop if no further changes are seen.
+			    
+			    <br />
+			    <code>
+			    if (countNonZero(foo) == 0) break;
+			    </code>
+			    <br />
+			    
+			    You can find the source code <a href="https://github.com/burakakde/morphological_thinning_using_structuring_elements">here</a>
+			    
+								<!--
+									<h2>Heading Level 2</h2>
+									<h3>Heading Level 3</h3>
+									<h4>Heading Level 4</h4>
+									<h5>Heading Level 5</h5>
+									<h6>Heading Level 6</h6>
+									<hr />
+									<header>
+										<h2>Heading with a Subtitle</h2>
+										<p>Lorem ipsum dolor sit amet nullam id egestas urna aliquam</p>
+									</header>
+									<p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing blandit tempus accumsan.</p>
+									<header>
+										<h3>Heading with a Subtitle</h3>
+										<p>Lorem ipsum dolor sit amet nullam id egestas urna aliquam</p>
+									</header>
+									<p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing blandit tempus accumsan.</p>
+									<header>
+										<h4>Heading with a Subtitle</h4>
+										<p>Lorem ipsum dolor sit amet nullam id egestas urna aliquam</p>
+									</header>
+									<p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing blandit tempus accumsan.</p>
+									<hr />
+									-->
+								<!-- Lists -->
+								<!--
+									<h2>Lists</h2>
+									<div class="row">
+										<div class="6u 12u$(small)">
+											<h3>Unordered</h3>
+											<ul>
+												<li>Dolor pulvinar etiam.</li>
+												<li>Sagittis lorem eleifend.</li>
+												<li>Felis feugiat dolore viverra.</li>
+												<li>Dolor pulvinar etiam.</li>
+											</ul>
+											<h3>Alternate</h3>
+											<ul class="alt">
+												<li>Dolor pulvinar etiam etiam.</li>
+												<li>Sagittis adipiscing eleifend.</li>
+												<li>Felis enim dolore viverra.</li>
+												<li>Dolor pulvinar etiam etiam.</li>
+											</ul>
+										</div>
+										<div class="6u$ 12u$(small)">
+											<h3>Ordered</h3>
+											<ol>
+												<li>Dolor pulvinar etiam.</li>
+												<li>Etiam vel felis at viverra.</li>
+												<li>Felis enim feugiat magna.</li>
+												<li>Etiam vel felis nullam.</li>
+												<li>Felis enim et tempus.</li>
+											</ol>
+											<h3>Icons</h3>
+											<ul class="icons">
+												<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+												<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+												<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+												<li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
+												<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+											</ul>
+											<ul class="icons alt">
+												<li><a href="#" class="icon alt fa-twitter"><span class="label">Twitter</span></a></li>
+												<li><a href="#" class="icon alt fa-facebook"><span class="label">Facebook</span></a></li>
+												<li><a href="#" class="icon alt fa-instagram"><span class="label">Instagram</span></a></li>
+												<li><a href="#" class="icon alt fa-github"><span class="label">Github</span></a></li>
+												<li><a href="#" class="icon alt fa-dribbble"><span class="label">Dribbble</span></a></li>
+											</ul>
+										</div>
+									</div>
+									<h3>Definition</h3>
+									<dl>
+										<dt>Item 1</dt>
+										<dd>
+											<p>Lorem ipsum dolor vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent.</p>
+										</dd>
+										<dt>Item 2</dt>
+										<dd>
+											<p>Lorem ipsum dolor vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent.</p>
+										</dd>
+										<dt>Item 3</dt>
+										<dd>
+											<p>Lorem ipsum dolor vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent.</p>
+										</dd>
+									</dl>
+									<h3>Actions</h3>
+									<ul class="actions">
+										<li><a href="#" class="button special">Special</a></li>
+										<li><a href="#" class="button">Default</a></li>
+									</ul>
+									<ul class="actions small">
+										<li><a href="#" class="button special small">Small</a></li>
+										<li><a href="#" class="button small">Small</a></li>
+									</ul>
+									<div class="row">
+										<div class="6u 12u$(small)">
+											<ul class="actions vertical">
+												<li><a href="#" class="button special">Default</a></li>
+												<li><a href="#" class="button">Default</a></li>
+											</ul>
+										</div>
+										<div class="6u 12u$(small)">
+											<ul class="actions vertical small">
+												<li><a href="#" class="button special small">Small</a></li>
+												<li><a href="#" class="button small">Small</a></li>
+											</ul>
+										</div>
+									</div>
+									<div class="row">
+										<div class="6u 12u$(small)">
+											<ul class="actions vertical">
+												<li><a href="#" class="button special fit">Default</a></li>
+												<li><a href="#" class="button fit">Default</a></li>
+											</ul>
+										</div>
+										<div class="6u$ 12u$(small)">
+											<ul class="actions vertical small">
+												<li><a href="#" class="button special small fit">Small</a></li>
+												<li><a href="#" class="button small fit">Small</a></li>
+											</ul>
+										</div>
+									</div>
+									<hr />
+								-->
+								<!-- Blockquote -->
+								<!--
+									<h2>Blockquote</h2>
+									<blockquote>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan faucibus. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis.</blockquote>
+									<hr />
+								-->
+								<!-- Table -->
+								<!--
+									<h2>Table</h2>
+									<h3>Default</h3>
+									<div class="table-wrapper">
+										<table>
+											<thead>
+												<tr>
+													<th>Name</th>
+													<th>Description</th>
+													<th>Price</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>Item 1</td>
+													<td>Ante turpis integer aliquet porttitor.</td>
+													<td>29.99</td>
+												</tr>
+												<tr>
+													<td>Item 2</td>
+													<td>Vis ac commodo adipiscing arcu aliquet.</td>
+													<td>19.99</td>
+												</tr>
+												<tr>
+													<td>Item 3</td>
+													<td> Morbi faucibus arcu accumsan lorem.</td>
+													<td>29.99</td>
+												</tr>
+												<tr>
+													<td>Item 4</td>
+													<td>Vitae integer tempus condimentum.</td>
+													<td>19.99</td>
+												</tr>
+												<tr>
+													<td>Item 5</td>
+													<td>Ante turpis integer aliquet porttitor.</td>
+													<td>29.99</td>
+												</tr>
+											</tbody>
+											<tfoot>
+												<tr>
+													<td colspan="2"></td>
+													<td>100.00</td>
+												</tr>
+											</tfoot>
+										</table>
+									</div>
+									-->
+									<!--
+									<h3>Alternate</h3>
+									<div class="table-wrapper">
+										<table class="alt">
+											<thead>
+												<tr>
+													<th>Name</th>
+													<th>Description</th>
+													<th>Price</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>Item 1</td>
+													<td>Ante turpis integer aliquet porttitor.</td>
+													<td>29.99</td>
+												</tr>
+												<tr>
+													<td>Item 2</td>
+													<td>Vis ac commodo adipiscing arcu aliquet.</td>
+													<td>19.99</td>
+												</tr>
+												<tr>
+													<td>Item 3</td>
+													<td> Morbi faucibus arcu accumsan lorem.</td>
+													<td>29.99</td>
+												</tr>
+												<tr>
+													<td>Item 4</td>
+													<td>Vitae integer tempus condimentum.</td>
+													<td>19.99</td>
+												</tr>
+												<tr>
+													<td>Item 5</td>
+													<td>Ante turpis integer aliquet porttitor.</td>
+													<td>29.99</td>
+												</tr>
+											</tbody>
+											<tfoot>
+												<tr>
+													<td colspan="2"></td>
+													<td>100.00</td>
+												</tr>
+											</tfoot>
+										</table>
+									</div>
+									<hr />
+									-->
+								<!-- Buttons -->
+								<!--
+									<h2>Buttons</h2>
+									<ul class="actions">
+										<li><a href="#" class="button special">Special</a></li>
+										<li><a href="#" class="button">Default</a></li>
+									</ul>
+									<ul class="actions">
+										<li><a href="#" class="button special big">Big</a></li>
+										<li><a href="#" class="button">Default</a></li>
+										<li><a href="#" class="button small">Small</a></li>
+									</ul>
+									<ul class="actions fit">
+										<li><a href="#" class="button special fit">Fit</a></li>
+										<li><a href="#" class="button fit">Fit</a></li>
+									</ul>
+									<ul class="actions fit small">
+										<li><a href="#" class="button special fit small">Fit + Small</a></li>
+										<li><a href="#" class="button fit small">Fit + Small</a></li>
+									</ul>
+									<ul class="actions">
+										<li><a href="#" class="button special icon fa-search">Icon</a></li>
+										<li><a href="#" class="button icon fa-download">Icon</a></li>
+									</ul>
+									<ul class="actions">
+										<li><span class="button special disabled">Special</span></li>
+										<li><span class="button disabled">Default</span></li>
+									</ul>
+									<hr />
+								-->
+								<!-- Form -->
+								<!--
+									<h2>Form</h2>
+									<form method="post" action="#" class="alt">
+										<div class="row uniform">
+											<div class="6u 12u$(xsmall)">
+												<input type="text" name="demo-name" id="demo-name" value="" placeholder="Name" />
+											</div>
+											<div class="6u$ 12u$(xsmall)">
+												<input type="email" name="demo-email" id="demo-email" value="" placeholder="Email" />
+											</div>
+								-->
+											<!-- Break -->
+											<!--
+											<div class="12u$">
+												<div class="select-wrapper">
+													<select name="demo-category" id="demo-category">
+														<option value="">- Category -</option>
+														<option value="1">Manufacturing</option>
+														<option value="1">Shipping</option>
+														<option value="1">Administration</option>
+														<option value="1">Human Resources</option>
+													</select>
+												</div>
+											</div>
+											-->
+											<!-- Break -->
+											<!--
+											<div class="4u 12u$(small)">
+												<input type="radio" id="demo-priority-low" name="demo-priority" checked>
+												<label for="demo-priority-low">Low</label>
+											</div>
+											<div class="4u 12u$(small)">
+												<input type="radio" id="demo-priority-normal" name="demo-priority">
+												<label for="demo-priority-normal">Normal</label>
+											</div>
+											<div class="4u$ 12u$(small)">
+												<input type="radio" id="demo-priority-high" name="demo-priority">
+												<label for="demo-priority-high">High</label>
+											</div>
+											-->
+											<!-- Break -->
+											<!--
+											<div class="6u 12u$(small)">
+												<input type="checkbox" id="demo-copy" name="demo-copy">
+												<label for="demo-copy">Email me a copy</label>
+											</div>
+											<div class="6u$ 12u$(small)">
+												<input type="checkbox" id="demo-human" name="demo-human" checked>
+												<label for="demo-human">I am a human</label>
+											</div>
+											-->
+											<!-- Break -->
+											<!--
+											<div class="12u$">
+												<textarea name="demo-message" id="demo-message" placeholder="Enter your message" rows="6"></textarea>
+											</div>
+											-->
+											<!-- Break -->
+											<!--
+											<div class="12u$">
+												<ul class="actions">
+													<li><input type="submit" value="Send Message" class="special" /></li>
+													<li><input type="reset" value="Reset" /></li>
+												</ul>
+											</div>
+										</div>
+									</form>
+									<hr />
+									-->
+								<!-- Image -->
+									<!--
+									<h2>Image</h2>
+									<h3>Fit</h3>
+									<span class="image fit"><img src="images/pic01.jpg" alt="" /></span>
+									<div class="box alt">
+										<div class="row 50% uniform">
+											<div class="4u"><span class="image fit"><img src="images/pic02.jpg" alt="" /></span></div>
+											<div class="4u"><span class="image fit"><img src="images/pic03.jpg" alt="" /></span></div>
+											<div class="4u$"><span class="image fit"><img src="images/pic04.jpg" alt="" /></span></div>
+											-->
+											<!-- Break -->
+											<!--
+											<div class="4u"><span class="image fit"><img src="images/pic04.jpg" alt="" /></span></div>
+											<div class="4u"><span class="image fit"><img src="images/pic02.jpg" alt="" /></span></div>
+											<div class="4u$"><span class="image fit"><img src="images/pic03.jpg" alt="" /></span></div>
+											-->
+											<!-- Break -->
+											<!--
+											<div class="4u"><span class="image fit"><img src="images/pic03.jpg" alt="" /></span></div>
+											<div class="4u"><span class="image fit"><img src="images/pic04.jpg" alt="" /></span></div>
+											<div class="4u$"><span class="image fit"><img src="images/pic02.jpg" alt="" /></span></div>
+										</div>
+									</div>
+									<h3>Left &amp; Right</h3>
+									<p><span class="image left"><img src="images/pic08.jpg" alt="" /></span>Lorem ipsum dolor sit accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Vestibulum ante ipsum primis in faucibus magna blandit adipiscing eu felis iaculis.</p>
+									<p><span class="image right"><img src="images/pic09.jpg" alt="" /></span>Lorem ipsum dolor sit accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Vestibulum ante ipsum primis in faucibus magna blandit adipiscing eu felis iaculis.</p>
+									<hr />
+									-->
+								<!-- Box -->
+									<!--
+									<h2>Box</h2>
+									<div class="box">
+										<p>Felis sagittis eget tempus primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Magna sed etiam ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus lorem ipsum dolor sit amet nullam. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Vestibulum ante ipsum primis in faucibus magna blandit adipiscing eu felis iaculis volutpat lorem ipsum dolor.</p>
+									</div>
+									<hr />
+									-->
+								<!-- Preformatted Code -->
+									<!--
+									<h2>Preformatted</h2>
+									<pre><code>i = 0;
+while (!deck.isInOrder()) {
+    print 'Iteration ' + i;
+    deck.shuffle();
+    i++;
+}
+print 'It took ' + i + ' iterations to sort the deck.';
+</code></pre>
+							</section>
+					</div>
+									-->
+				<!-- Footer -->
+					<footer id="footer">
+						<!--
+						<section>
+							<form method="post" action="#">
+								<div class="field">
+									<label for="name">Name</label>
+									<input type="text" name="name" id="name" />
+								</div>
+								<div class="field">
+									<label for="email">Email</label>
+									<input type="text" name="email" id="email" />
+								</div>
+								<div class="field">
+									<label for="message">Message</label>
+									<textarea name="message" id="message" rows="3"></textarea>
+								</div>
+								<ul class="actions">
+									<li><input type="submit" value="Send Message" /></li>
+								</ul>
+							</form>
+						</section>
+						
+						<section class="split contact">
+							<!--
+							<section class="alt">
+								<h3>Address</h3>
+								<p>1234 Somewhere Road #87257<br />
+								Nashville, TN 00000-0000</p>
+							</section>
+							<section>
+								<h3>Phone</h3>
+								<p><a href="#">(000) 000-0000</a></p>
+							</section>
+							
+							<section>
+								<h3>Email</h3>
+								<p><a href="#">burakakde@gmail.com</a></p>
+							</section>
+		
+							
+							<section>
+								<h3>Social</h3>
+								<ul class="icons alt">
+									<li><a href="#" class="icon alt fa-twitter"><span class="label">Twitter</span></a></li>
+									<li><a href="#" class="icon alt fa-facebook"><span class="label">Facebook</span></a></li>
+									<li><a href="#" class="icon alt fa-instagram"><span class="label">Instagram</span></a></li>
+									<li><a href="#" class="icon alt fa-github"><span class="label">GitHub</span></a></li>
+								</ul>
+							</section>
+							-->
+						</section>
+					</footer>
+
+				<!-- Copyright -->
+					<div id="copyright">
+						<ul><li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
+© 2018 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+API
+Training
+Shop
+Blog
+About
